@@ -11,12 +11,15 @@ import UIKit
 class DataViewController: UIViewController {
 
     @IBOutlet weak var dataLabel: UILabel!
+    @IBOutlet weak var petImage: UIImageView!
+    @IBOutlet var animalName: UILabel!
     var dataObject: AnyObject?
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,9 +28,15 @@ class DataViewController: UIViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
+        
         super.viewWillAppear(animated)
         if let obj: AnyObject = dataObject {
+            print(obj)
+            var ar = obj as Dictionary<String, String>
+            
             self.dataLabel!.text = obj.description
+            self.animalName!.text = ar["name"]
+            self.petImage.image = UIImage(named:ar["id"]! + ".jpg")
         } else {
             self.dataLabel!.text = ""
         }
