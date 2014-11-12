@@ -62,7 +62,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
 
     func viewControllerAtIndex(index: Int, storyboard: UIStoryboard) -> DataViewController? {
         // Return the data view controller for the given index.
-        if (self.pageAnimalData.count == 0) || (index >= self.pageAnimalData.count) {
+        if (self.pageAnimalData.count == 0) || (index >= self.pageAnimalData.count + 1) {
             return nil
         }
 
@@ -77,11 +77,10 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
     func indexOfViewController(viewController: DataViewController) -> Int {
         // Return the index of the given data view controller.
         // For simplicity, this implementation uses a static array of model objects and the view controller stores the model object; you can therefore use the model object to identify the index.
-        print("indexofviewcontrooller")
+        
         if let dataObject: AnyObject = viewController.dataObject {
-            
-            //return self.pageData.indexOfObject(dataObject)
-            return self.pageAnimalData.count
+            var dicObject = dataObject as Dictionary<String, String>
+            return dicObject["id"]!.toInt()!
         } else {
             return NSNotFound
         }
@@ -106,7 +105,7 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         }
         
         index++
-        if index == self.pageAnimalData.count {
+        if index == self.pageAnimalData.count + 1 {
             return nil
         }
         return self.viewControllerAtIndex(index, storyboard: viewController.storyboard!)

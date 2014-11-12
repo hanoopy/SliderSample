@@ -31,7 +31,6 @@ class DataViewController: UIViewController {
         
         super.viewWillAppear(animated)
         if let obj: AnyObject = dataObject {
-            print(obj)
             var ar = obj as Dictionary<String, String>
             
             self.dataLabel!.text = obj.description
