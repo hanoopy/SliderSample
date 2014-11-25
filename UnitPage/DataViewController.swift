@@ -11,7 +11,6 @@ import UIKit
 class DataViewController: UIViewController {
 
     @IBOutlet weak var dataLabel: UILabel!
-    @IBOutlet weak var petImage: UIImageView!
     @IBOutlet var animalName: UILabel!
     var dataObject: AnyObject?
 
@@ -33,9 +32,15 @@ class DataViewController: UIViewController {
         if let obj: AnyObject = dataObject {
             var ar = obj as Dictionary<String, String>
             
-            self.dataLabel!.text = obj.description
+            self.dataLabel!.text = ar["name"]
             self.animalName!.text = ar["name"]
-            self.petImage.image = UIImage(named:ar["id"]! + ".jpg")
+            
+            var petImg:UIImage! = UIImage(named:ar["id"]! + ".jpg")
+            var petImgView:UIImageView! = UIImageView(image: petImg)
+            petImgView.frame = CGRectMake(10,10,200,200)
+            petImgView.contentMode = UIViewContentMode.ScaleAspectFit
+            petImgView.center = CGPointMake(self.view.frame.width / 2, 200)
+            self.view.addSubview(petImgView)
         } else {
             self.dataLabel!.text = ""
         }

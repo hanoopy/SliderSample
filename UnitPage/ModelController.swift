@@ -28,36 +28,17 @@ class ModelController: NSObject, UIPageViewControllerDataSource {
         super.init()
         // Create the data model.
         let dateFormatter = NSDateFormatter()
-        pageData = dateFormatter.monthSymbols
-        pageData = ["小太郎", "諭吉", "さくら"]
-        
-        var tmp:Dictionary = [1: ["id": "1", "name": "なまえ"]]
-        tmp[2] = ["id": "2", "name": "ゆっきー"]
-        
-        let _dbfile:NSString = "tes.sqlite"
-        let _dir:AnyObject = NSSearchPathForDirectoriesInDomains(
-            NSSearchPathDirectory.DocumentDirectory,
-            NSSearchPathDomainMask.UserDomainMask,
-            true)[0]
-        let fileManager:NSFileManager = NSFileManager.defaultManager()
-        let _path:String = _dir.stringByAppendingPathComponent(_dbfile)
-        
+//        pageData = dateFormatter.monthSymbols
+//        pageData = ["小太郎", "諭吉", "さくら"]
+//        
         //データ取得
-        let _db = FMDatabase(path: _path)
-        let _sql_select = "SELECT * FROM animal"
-        _db.open()
-        var _rows = _db.executeQuery(_sql_select, withArgumentsInArray: [1])
-        
         var animals = Dictionary<Int, Dictionary<String, String>>()
-        while(_rows.next()){
-            var _id = _rows.stringForColumn("a_id")
-            var _name = _rows.stringForColumn("a_name")
-            animals[_id.toInt()!] = ["id": _id, "name": _name]
-        }
+        animals[1] = ["id": "1", "name": "DOG"]
+        animals[2] = ["id": "2", "name": "CAT"]
+        animals[3] = ["id": "3", "name": "RABBIT"]
         
         self.pageAnimalData = animals
-        _db.close()
-
+        
     }
 
     func viewControllerAtIndex(index: Int, storyboard: UIStoryboard) -> DataViewController? {
